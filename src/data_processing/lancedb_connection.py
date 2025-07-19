@@ -2,7 +2,7 @@ import os
 from dotenv import load_dotenv
 import lancedb
 import pyarrow as pa
-from gemini_model import gemini_embedding
+from src.data_processing.gemini_model import gemini_embedding
 
 
 load_dotenv()

@@ -15,7 +15,7 @@ def gemini_model():
     )
     return model
 
-def gemini_embedding():
-    embeddings = GoogleGenerativeAIEmbeddings(model="models/embedding-001")
+embedding_function = GoogleGenerativeAIEmbeddings(model="models/embedding-001")
 
-    return embeddings
+def gemini_embedding():
+    return embedding_function

@@ -5,8 +5,8 @@ from typing import List
 from langchain_core.documents import Document
 import lancedb
 
-from lancedb_connection import table
-from gemini_model import gemini_embedding
+from src.data_processing.gemini_model import gemini_embedding
+from src.data_processing.lancedb_connection import table
 
 
 
