@@ -4,11 +4,9 @@ from lancedb_connection import table
 from text_cleaning import text_cleaning
 from text_translate import text_translate
 from chunks import split_text
+import time
 
-
-def add_to_vector_db(text, language, doc_type, source):
-    embeddings = gemini_embedding()
-    tb = table()
+def add_to_vector_db(tb,embeddings,text, language, doc_type, source):
     embedding = embeddings.embed_query(text)
 
     tb.add([{
@@ -23,7 +21,10 @@ def add_to_vector_db(text, language, doc_type, source):
 
 def add_to_lancedb():
     audio_text=text_cleaning()
-    translated_text=text_translate()
+    time.sleep(60)
+    translated_text=text_translate(audio_text)
+    tb = table()
+    embeddings = gemini_embedding()
 
     for text in audio_text:
         chunk=split_text(text)
@@ -31,15 +32,15 @@ def add_to_lancedb():
             chunk=chunk[1:]
 
         for t in chunk:
-            add_to_vector_db(t, "Hindi", "Call Recording", "call transcript hindi")
+            add_to_vector_db(tb,embeddings,t, "Hindi", "conversation", "call transcript hindi")
             
     for text in translated_text:
         chunk=split_text(text)
-        if "translate" in chunk[0] :
+        if "translat" in chunk[0] :
             chunk=chunk[1:]
 
         for t in chunk:
-            add_to_vector_db(t, "English", "Call Recording", "call transcript english")
+            add_to_vector_db(tb,embeddings,t, "English", "conversation", "call transcript english")
 
     with open("/home/rajeev-kumar/Desktop/InsureBot-Quest-2025/src/components/Knowledge Base.txt") as f:
         kb_text = f.read()
@@ -47,6 +48,9 @@ def add_to_lancedb():
     f.close()
     chunk=split_text(kb_text)
     for t in chunk:
-        add_to_vector_db(t, "English", "Knowledge Base", "knowledge base")
+        add_to_vector_db(tb,embeddings,t, "English", "knowledge base", "Scenario Based Talking Points")
 
-    
+
+if __name__ == "__main__":
+    add_to_lancedb()
+

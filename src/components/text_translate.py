@@ -4,9 +4,8 @@ from gemini_model import gemini_model
 
 
 
-def text_translate():
+def text_translate(audio_text):
     translated_text=[]
-    audio_text=text_cleaning()
     model=gemini_model()
     translation_prompt = ChatPromptTemplate.from_messages(
         [
@@ -30,7 +29,7 @@ def text_translate():
                 "human",
                 """
                 Here is the cleaned Hindi conversation:
-                {hindi_text}
+                {text}
 
                 Please translate this conversation into polite, meaningful, natural human-like English, clearly labeling each line as **'Agent:'** or **'Customer:'**.
                 """
@@ -47,4 +46,5 @@ def text_translate():
     return translated_text
 
 if __name__ == "__main__":
-    print(text_translate() )
+    audio_text=text_cleaning() 
+    print(text_translate(audio_text) )

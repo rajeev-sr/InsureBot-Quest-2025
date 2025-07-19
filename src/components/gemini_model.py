@@ -8,11 +8,6 @@ load_dotenv()
 GOOGLE_API_KEY=os.getenv("GOOGLE_API_KEY")
 os.environ["GOOGLE_API_KEY"]=GOOGLE_API_KEY
 
-
-
-embeddings = GoogleGenerativeAIEmbeddings(model="models/embedding-001")
-
-
 def gemini_model():
     model = ChatGoogleGenerativeAI(
         model="gemini-2.5-flash",
