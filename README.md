@@ -80,7 +80,6 @@ Here's the updated **"How to Run"** section of the `README.md` with `.env` setup
 1. **Clone the repository**
 
 ```bash
-git clone https://github.com/rajeev-sr/InsureBot-Quest-2025
 cd InsureBot-Quest-2025
 ````
 
@@ -97,6 +96,14 @@ source env/bin/activate   # On Windows: env\Scripts\activate
 
 ```bash
 cp .env.example .env
+```
+* or add these to your .env 
+```bash
+GOOGLE_API_KEY="<GOOGLE_API_KEY>"
+lancedb_uri="<lancedb_uri>"
+lancedb_api_key="<lancedb_api_key>"
+lancedb_region="<lancedb_region>"
+ASSEMBLYAI_API_KEY="<ASSEMBLYAI_API_KEY>"
 ```
 
 * Fill in your Gemini API key and other configs in `.env`.
