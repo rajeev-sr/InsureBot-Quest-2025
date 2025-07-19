@@ -5,24 +5,15 @@ import os
 import threading
 from langdetect import detect
 from langchain_google_genai import ChatGoogleGenerativeAI, GoogleGenerativeAIEmbeddings
-from langchain.prompts import PromptTemplate
-from langchain_community.vectorstores import LanceDB
-from langchain.chains import RetrievalQA
 from pydub import AudioSegment
 from pydub.playback import play
 import time
-import lancedb
-from langchain_core.retrievers import BaseRetriever
-from typing import List
-from langchain_core.documents import Document
-from pydantic import Field
-from gtts.lang import tts_langs
-from typing import Any
 import concurrent.futures
-import joblib
 from streamlit import audio
+
 import nest_asyncio
 nest_asyncio.apply()
+
 
 
 from src.data_processing.lancedb_connection import table
@@ -84,7 +75,7 @@ def speak_text(text, lang="en"):
 # Speech Recognition
 def listen_to_user():
     with sr.Microphone() as source:
-        print("🎙️ Listening...")
+        print(" Listening...")
         try:
             audio = recognizer.listen(source, phrase_time_limit=6)
             if stop_conversation_flag.is_set():
@@ -156,9 +147,10 @@ def start_conversation():
     customer_language = "en"
     policy_holder_name=details()['policy_holder_name']
     veena_reply = f"Hello and very Good Morning Sir, May I speak with {policy_holder_name}?"
+    print("Veena: " + veena_reply)
+    print()
     call_transcript.append("Veena: " + veena_reply)
     conversation_history.append("Veena: " + veena_reply)
-    st.write(f"**Veena:** {veena_reply}")
     speak_text(veena_reply)
 
     while not stop_conversation_flag.is_set():
@@ -174,7 +166,6 @@ def start_conversation():
             speak_text(error_text)
             continue
 
-        st.write(f"**Customer:** {user_text}")
         call_transcript.append("Customer: " + user_text)
         conversation_history.append("Customer: " + user_text)
 
@@ -189,7 +180,6 @@ def start_conversation():
         veena_reply = generate_response(user_text,call_transcript[-2],rag_reply)
         call_transcript.append("Veena: " + veena_reply)
         conversation_history.append("Veena: " + veena_reply)
-        st.write(f"**Veena:** {veena_reply}")
 
         print(f"**Veena:** {veena_reply}")
         speak_text(veena_reply)
