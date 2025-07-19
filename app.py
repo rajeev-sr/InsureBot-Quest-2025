@@ -161,7 +161,7 @@ def start_conversation():
             break
 
         if not user_text:
-            error_text = "Could you please repeat?"
+            error_text = "I'm sorry, I didn't understand that. Could you please repeat?"
             st.write(f"**Veena:** {error_text}")
             speak_text(error_text)
             continue
