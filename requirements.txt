@@ -1,2 +1,13 @@
-
+streamlit
+SpeechRecognition
+gTTS
+pydub
+langdetect
 langchain
+langchain-google-genai
+langchain-community
+lancedb
+pydantic
+joblib
+assemblyai
+python-dotenv
