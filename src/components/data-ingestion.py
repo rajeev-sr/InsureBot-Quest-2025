@@ -1,0 +1,52 @@
+import uuid
+from gemini_model import gemini_embedding
+from lancedb_connection import table
+from text_cleaning import text_cleaning
+from text_translate import text_translate
+from chunks import split_text
+
+
+def add_to_vector_db(text, language, doc_type, source):
+    embeddings = gemini_embedding()
+    tb = table()
+    embedding = embeddings.embed_query(text)
+
+    tb.add([{
+        "id": str(uuid.uuid4()),
+        "text": text,
+        "embedding": embedding,
+        "language": language,
+        "type": doc_type,
+        "source": source
+    }])
+    print("Added to vector DB")
+
+def add_to_lancedb():
+    audio_text=text_cleaning()
+    translated_text=text_translate()
+
+    for text in audio_text:
+        chunk=split_text(text)
+        if "संशोधित" in chunk[0] :
+            chunk=chunk[1:]
+
+        for t in chunk:
+            add_to_vector_db(t, "Hindi", "Call Recording", "call transcript hindi")
+            
+    for text in translated_text:
+        chunk=split_text(text)
+        if "translate" in chunk[0] :
+            chunk=chunk[1:]
+
+        for t in chunk:
+            add_to_vector_db(t, "English", "Call Recording", "call transcript english")
+
+    with open("/home/rajeev-kumar/Desktop/InsureBot-Quest-2025/src/components/Knowledge Base.txt") as f:
+        kb_text = f.read()
+
+    f.close()
+    chunk=split_text(kb_text)
+    for t in chunk:
+        add_to_vector_db(t, "English", "Knowledge Base", "knowledge base")
+
+    
