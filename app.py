@@ -162,7 +162,6 @@ def start_conversation():
 
         if not user_text:
             error_text = "I'm sorry, I didn't understand that. Could you please repeat?"
-            st.write(f"**Veena:** {error_text}")
             speak_text(error_text)
             continue
 
@@ -181,7 +180,7 @@ def start_conversation():
         call_transcript.append("Veena: " + veena_reply)
         conversation_history.append("Veena: " + veena_reply)
 
-        print(f"**Veena:** {veena_reply}")
+        print(f"Veena: {veena_reply}")
         speak_text(veena_reply)
 
 # Streamlit UI

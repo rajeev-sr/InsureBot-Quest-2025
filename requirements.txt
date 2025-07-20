@@ -12,12 +12,3 @@ joblib
 assemblyai
 python-dotenv
 nest_asyncio
-
-# sudo apt update
-# sudo apt install portaudio19-dev python3-pyaudio
-# pip install pyaudio
-# sudo apt update
-# sudo apt install g++-11
-
-# # Now update libstdc++ links (back up existing one if needed)
-# sudo cp /usr/lib/gcc/x86_64-linux-gnu/11/libstdc++.so.6 /usr/lib/x86_64-linux-gnu/
