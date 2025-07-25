@@ -80,6 +80,7 @@ Here's the updated **"How to Run"** section of the `README.md` with `.env` setup
 1. **Clone the repository**
 
 ```bash
+git clone <url>
 cd InsureBot-Quest-2025
 ````
 
