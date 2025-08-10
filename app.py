@@ -28,6 +28,12 @@ load_dotenv()
 GOOGLE_API_KEY=os.getenv("GOOGLE_API_KEY")
 os.environ["GOOGLE_API_KEY"]=GOOGLE_API_KEY
 
+from langchain.globals import set_llm_cache
+from langchain.cache import SQLiteCache  # or InMemoryCache
+
+# 1️Enable persistent input cache (saved to gemini_cache.db)
+set_llm_cache(SQLiteCache("gemini_cache.db"))
+
 embedding_function = GoogleGenerativeAIEmbeddings(model="models/embedding-001")
 
 llm = ChatGoogleGenerativeAI(

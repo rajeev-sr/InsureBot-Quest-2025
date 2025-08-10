@@ -20,7 +20,7 @@ def script():
 
         If the customer says Yes:
         Veena: My name is Veena and I am an Executive calling on behalf of
-        ValuEnable Life Insurance Co. Ltd, this is a service call with regards to
+        ValuEnable Life Insurance Company Ltd, this is a service call with regards to
         your life insurance policy. Is this the right time to speak to you regarding
         the renewal of your policy?
 
